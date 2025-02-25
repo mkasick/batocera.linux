@@ -45,6 +45,9 @@ amigacdtv:
 amstradcpc:
   emulator: libretro
   core:     cap32
+apotris:
+  emulator: apotris
+  core:     apotris
 apfm1000:
   emulator: libretro
   core:     mame
