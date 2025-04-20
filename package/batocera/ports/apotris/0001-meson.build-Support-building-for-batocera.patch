@@ -1,19 +1,19 @@
-From a5c76c3bd1217838e1d72e973a5e1bd08bada3ba Mon Sep 17 00:00:00 2001
+From 58805cd1e6ea471e11a0f2fc577313ad3b5b73df Mon Sep 17 00:00:00 2001
 From: Mike Kasick <mike@kasick.org>
 Date: Mon, 24 Feb 2025 23:32:40 -0500
 Subject: [PATCH] meson.build: Support building for batocera.
 
 - Add SDL2_mixer optional dependency for portmaster.
-- Install assets and license in datadir.
+- Install assets, shaders, and license in datadir.
 ---
- meson.build | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ meson.build | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
 diff --git a/meson.build b/meson.build
-index ec3d6dd..c450559 100644
+index 3555c17..68b0f07 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -166,7 +166,10 @@ if host_machine.system() != 'gba'
+@@ -221,7 +221,10 @@ if host_machine.system() != 'gba' and host_machine.system() != 'n3ds'
                  sdl_mixer = dependency('sdl2_mixer', static : true, default_options : ['default_library=static'], fallback : ['sdl2_mixer', 'sdl2_mixer_dep'])
              else
                  sdl2_dep = dependency('sdl2', static : false, default_options : ['default_library=shared', 'test=false'], fallback : ['sdl2', 'sdl2_dep'])
@@ -25,17 +25,19 @@ index ec3d6dd..c450559 100644
              endif
          endif
          soloud = dependency('SoLoud', static : true, default_options : ['default_library=static'], fallback : ['SoLoud', 'soloud_dep'])
-@@ -314,8 +317,8 @@ if host_machine.system() != 'gba'
+@@ -372,9 +375,9 @@ if host_machine.system() != 'gba' and host_machine.system() != 'n3ds'
              install_subdir(audio_dir, install_dir : 'Contents/Resources')
              install_subdir('license', install_dir : 'Contents/Resources')
          else
 -            install_subdir(audio_dir, install_dir : '.')
+-            install_subdir(shaders_dir, install_dir : '.')
 -            install_subdir('license', install_dir : '.')
-+            install_subdir(audio_dir, install_dir : get_option('datadir'))
++            install_subdir(audio_dir, install_dir : get_option('datadir'), exclude_directories : ['shaders'])
++            install_subdir(shaders_dir, install_dir : get_option('datadir'))
 +            install_subdir('license', install_dir : get_option('datadir'))
          endif
      endif
- else
+ elif host_machine.system() == 'n3ds'
 -- 
 2.43.0
 

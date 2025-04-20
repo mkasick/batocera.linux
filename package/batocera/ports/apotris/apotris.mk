@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-APOTRIS_VERSION        = v4.0.2
+APOTRIS_VERSION        = v4.1.0
 APOTRIS_SITE           = https://gitea.com/akouzoukos/apotris.git
 APOTRIS_SITE_METHOD    = git
 APOTRIS_GIT_SUBMODULES = YES
@@ -12,7 +12,7 @@ APOTRIS_LICENSE        = AGPL-3.0
 APOTRIS_LICENSE_FILE   = LICENSE.txt
 
 APOTRIS_DEPENDENCIES = host-python3 host-xxd host-pkgconf \
-                       opus libogg libzlib sdl2 sdl2_mixer
+                       opus libogg libzlib sdl2 sdl2_mixer libgles
 
 APOTRIS_CONF_OPTS = --datadir=share/apotris \
                     -Dportmaster=true -DSoLoud:portmaster=true
